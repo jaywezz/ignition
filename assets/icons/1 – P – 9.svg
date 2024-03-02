@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-_1_P_9);
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-width: 1.8px;
+        stroke-dasharray: 0 0;
+      }
+    </style>
+    <clipPath id="clip-_1_P_9">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="_1_P_9" data-name="1 – P – 9" class="cls-1">
+    <path id="Vector_671" data-name="Vector 671" class="cls-2" d="M0,18.538l13.845-13.2a.425.425,0,0,1,.586,0L21.8,12.36a.425.425,0,0,0,.586,0L35.344,0" transform="matrix(0.966, -0.259, 0.259, 0.966, 5.427, 22.813)"/>
+    <path id="Vector_1" data-name="Vector 1" class="cls-2" d="M7.568,0,.124,7.444a.425.425,0,0,0,0,.6l7.444,7.444" transform="translate(47.32 15.856) rotate(120.478)"/>
+  </g>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-_1_P_6);
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.8px;
+      }
+    </style>
+    <clipPath id="clip-_1_P_6">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="_1_P_6" data-name="1 – P – 6" class="cls-1">
+    <g id="Icon_feather-shopping-bag" data-name="Icon feather-shopping-bag" transform="translate(6.006 5.896)">
+      <path id="Path_42" data-name="Path 42" class="cls-2" d="M9.331,3,4.5,9.442V31.988a3.221,3.221,0,0,0,3.221,3.221H30.267a3.221,3.221,0,0,0,3.221-3.221V9.442L28.657,3Z" transform="translate(0)"/>
+      <path id="Path_43" data-name="Path 43" class="cls-2" d="M4.5,9H33.488" transform="translate(0 0.442)"/>
+      <path id="Path_44" data-name="Path 44" class="cls-2" d="M24.884,15A6.442,6.442,0,0,1,12,15" transform="translate(0.552 0.884)"/>
+    </g>
+  </g>
+</svg>

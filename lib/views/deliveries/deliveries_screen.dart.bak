@@ -1,0 +1,491 @@
+// import 'package:flutter/material.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:get/get.dart';
+// import 'package:intl/intl.dart';
+// import 'package:soko_flow/configs/constants.dart';
+//
+// import 'package:soko_flow/configs/styles.dart';
+// import 'package:soko_flow/data/providers/deliveries/deliveries_provider.dart';
+// import 'package:soko_flow/routes/route_helper.dart';
+// import 'package:soko_flow/utils/currency_formatter.dart';
+//
+// import 'detailed_delivery/detailed_delivery_screen.dart';
+//
+// class DeliveryScreen extends ConsumerWidget{
+//   const DeliveryScreen({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     return Scaffold(
+//       body: SafeArea(
+//         child: SizedBox(
+//             height: double.infinity,
+//             width: double.infinity,
+//             // child: FutureBuilder(
+//             //   future: deliveryCtrl.fetchUserDeliveries(), // async work
+//             //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+//             child: Container(
+//                 padding: EdgeInsets.only(
+//                     left: defaultPadding(context),
+//                     right: defaultPadding(context),
+//                     bottom: defaultPadding(context)),
+//                 decoration: const BoxDecoration(
+//                     image: DecorationImage(
+//                         image: AssetImage('assets/bg.png'), fit: BoxFit.cover),
+//                     borderRadius:
+//                         BorderRadius.only(bottomLeft: Radius.circular(30))),
+//                 child: Column(
+//                   children: [
+//                     SizedBox(
+//                       height: defaultPadding(context),
+//                     ),
+//                     Stack(
+//                       children: [
+//                         Material(
+//                           child: InkWell(
+//                             splashColor:
+//                             Theme.of(context).splashColor,
+//                             onTap: () {
+//                               Get.back();
+//                               // Get.back();
+//                             },
+//                             child: Icon(
+//                               Icons.arrow_back_ios_new,
+//                               color: Styles.darkGrey,
+//                             ),
+//                           ),
+//                         ),
+//                         Align(
+//                           alignment: Alignment.center,
+//                           child: Text(
+//                             'Deliveries',
+//                             style: Styles.heading2(context),
+//                           ),
+//                         ),
+//                         Align(
+//                           alignment: Alignment.topRight,
+//                           child: Material(
+//                             child: InkWell(
+//                               splashColor:
+//                               Theme.of(context).splashColor,
+//                               onTap: () =>
+//                                   Get.toNamed(RouteHelper.getInitial()),
+//                               child: Icon(
+//                                 Icons.home_sharp,
+//                                 size: defaultPadding(context) * 2,
+//                                 color: Styles.appSecondaryColor,
+//                               ),
+//                             ),
+//                           ),
+//                         )
+//                       ],
+//                     ),
+//                     SizedBox(
+//                       height: defaultPadding(context) * 1.3,
+//                     ),
+//
+//                     Row(
+//                       mainAxisAlignment:
+//                       MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Text(
+//                           'Today',
+//                           style: Styles.heading3(context),
+//                         ),
+//                         const SizedBox(
+//                           height: 10,
+//                         ),
+//                         Text(
+//                           DateFormat.MMMMEEEEd().format(DateTime.now()),
+//                           style: Styles.smallGreyText(context),
+//                         ),
+//                       ],
+//                     ),
+//                     SizedBox(
+//                       height: defaultPadding(context) * 1.3,
+//                     ),
+//
+//
+//                     ref.watch(todayDeliveriesProvider).when(data: (data){
+//                       if(data.isEmpty){
+//                         return Align(
+//                           alignment: Alignment.centerLeft,
+//                           child: Padding(
+//                             padding: const EdgeInsets.all(8.0),
+//                             child: Text("No deliveries today", style: Styles.heading3(context).copyWith(color: Colors.black54)),
+//                           ),
+//                         );
+//                       }
+//                       return Expanded(
+//                           child: ListView.builder(
+//                               shrinkWrap: true,
+//                               itemCount:data.length,
+//                               // mydeliveries.length,
+//                               itemBuilder: (context, index) {
+//                                 double totalPrice = 0;
+//                                 data[index].deliveryItems.forEach((item) {
+//                                   totalPrice += double.parse(item.sellingPrice!) * double.parse(item.allocatedQuantity!);
+//                                 });
+//
+//                                 return GestureDetector(
+//                                     onTap: () {
+//                                       Get.to(
+//                                           DetailedDeliveryScreen(delivery: data[index], initialScreen: 'user_deliveries',));
+//                                     },
+//                                     child: Card(
+//                                       elevation: 2,
+//                                       child: Container(
+//                                         child: Row(
+//                                           //crossAxisAlignment: CrossAxisAlignment.start,
+//                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                                           children: [
+//                                             Flexible(
+//                                               flex: 5,
+//                                               child: Padding(
+//                                                 padding:
+//                                                 const EdgeInsets.only(left: 10),
+//                                                 child: Column(
+//                                                   crossAxisAlignment: CrossAxisAlignment.start,
+//                                                   mainAxisAlignment: MainAxisAlignment.center,
+//                                                   children: [
+//                                                     const SizedBox(
+//                                                       height: 10,
+//                                                     ),
+//                                                     Text(data[index].customer.customerName!, style: Styles.heading3(context),
+//                                                     ),
+//                                                     const SizedBox(height: 10,),
+//                                                     Text(data[index].deliveryNote ?? "No info..", style: Styles.smallGreyText(context),
+//                                                       maxLines: 3,
+//                                                     ),
+//                                                     const SizedBox(
+//                                                       height: 10,
+//                                                     ),
+//                                                     Text("Kshs. ${formatCurrency.format(totalPrice)}", style: Styles.heading3(context).copyWith(color: Styles.appYellowColor),
+//                                                       maxLines: 3,
+//                                                     )
+//                                                   ],
+//                                                 ),
+//                                               ),
+//                                             ),
+//                                             Flexible(
+//                                               flex: 2,
+//                                               child: Padding(padding: const EdgeInsets.only(left: 5),
+//                                                 child: Column(
+//                                                   crossAxisAlignment: CrossAxisAlignment.end,
+//                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                                                   children: [
+//                                                     Icon(
+//                                                       Icons.more_vert,
+//                                                       color: Colors
+//                                                           .black,
+//                                                       size: 30.0,
+//                                                     ),
+//                                                     const SizedBox(
+//                                                       height: 30,
+//                                                     ),
+//                                                     Text(
+//                                                       DateFormat.yMMMEd().format( data[index].createdAt).toString(),
+//                                                       style: Styles
+//                                                           .heading4(
+//                                                           context)
+//                                                           .copyWith(
+//                                                           color: Colors
+//                                                               .black),
+//                                                       maxLines: 3,
+//                                                     )
+//                                                   ],
+//                                                 ),
+//                                               ),
+//                                             ),
+//                                           ],
+//                                         ),
+//                                         padding: EdgeInsets.all(
+//                                             defaultPadding(context) *
+//                                                 0.2),
+//                                         width: double.infinity,
+//                                       ),
+//                                       shape: RoundedRectangleBorder(
+//                                           borderRadius:
+//                                           BorderRadius.circular(
+//                                               10)),
+//                                     )
+//                                 );
+//
+//                                 // -------------------------
+//                               })
+//                         // child: DeliveryList(),
+//                       );
+//                     }, error: (error, stackTrace) => Text(error.toString(), style: Styles.heading3(context),), loading: (){
+//                       return CircularProgressIndicator();
+//                     }),
+//
+//                     Row(
+//                       mainAxisAlignment:
+//                       MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Text(
+//                           '',
+//                           style: Styles.heading2(context),
+//                         ),
+//                         const SizedBox(
+//                           height: 10,
+//                         ),
+//                         Text(
+//                           DateFormat.MMMMEEEEd().format(
+//                             DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day +1)
+//                           ),
+//                           style: Styles.smallGreyText(context),
+//                         ),
+//                       ],
+//                     ),
+//                     ref.watch(tommorowDeliveriesProvider).when(data: (data){
+//                       if(data.isEmpty){
+//                         return Padding(
+//                           padding: const EdgeInsets.all(8.0),
+//                           child: Align(
+//                               alignment: Alignment.centerLeft,
+//                               child: Text("No deliveries tommorow", style: Styles.heading3(context).copyWith(color: Colors.black54))),
+//                         );
+//                       }
+//                       return Expanded(
+//                           child: ListView.builder(
+//                               shrinkWrap: true,
+//                               itemCount:data.length,
+//                               // mydeliveries.length,
+//                               itemBuilder: (context, index) {
+//                                 double totalPrice = 0;
+//                                 data[index].deliveryItems.forEach((item) {
+//                                   totalPrice += double.parse(item.sellingPrice!) * double.parse(item.allocatedQuantity!);
+//                                 });
+//                                 return GestureDetector(
+//                                     onTap: () {
+//                                       Get.to(
+//                                           DetailedDeliveryScreen(delivery: data[index], initialScreen: 'user_deliveries'));
+//                                     },
+//                                     child: Card(
+//                                       elevation: 2,
+//                                       child: Container(
+//                                         child: Row(
+//                                           //crossAxisAlignment: CrossAxisAlignment.start,
+//                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                                           children: [
+//                                             Flexible(
+//                                               flex: 5,
+//                                               child: Padding(
+//                                                 padding:
+//                                                 const EdgeInsets.only(left: 10),
+//                                                 child: Column(
+//                                                   crossAxisAlignment: CrossAxisAlignment.start,
+//                                                   mainAxisAlignment: MainAxisAlignment.center,
+//                                                   children: [
+//                                                     const SizedBox(
+//                                                       height: 10,
+//                                                     ),
+//                                                     Text(data[index].customer.customerName!, style: Styles.heading3(context),
+//                                                     ),
+//                                                     const SizedBox(height: 10,),
+//                                                     Text(data[index].deliveryNote ?? "No info..", style: Styles.smallGreyText(context),
+//                                                       maxLines: 3,
+//                                                     ),
+//                                                     const SizedBox(
+//                                                       height: 10,
+//                                                     ),
+//                                                     Text("Kshs. ${formatCurrency.format(totalPrice)}", style: Styles.heading3(context).copyWith(color: Styles.appYellowColor),
+//                                                       maxLines: 3,
+//                                                     )
+//                                                   ],
+//                                                 ),
+//                                               ),
+//                                             ),
+//                                             Flexible(
+//                                               flex: 2,
+//                                               child: Padding(padding: const EdgeInsets.only(left: 5),
+//                                                 child: Column(
+//                                                   crossAxisAlignment: CrossAxisAlignment.end,
+//                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                                                   children: [
+//                                                     Icon(
+//                                                       Icons.more_vert,
+//                                                       color: Colors
+//                                                           .black,
+//                                                       size: 30.0,
+//                                                     ),
+//                                                     const SizedBox(
+//                                                       height: 30,
+//                                                     ),
+//                                                     Text(
+//                                                       DateFormat.yMMMEd().format( data[index].createdAt!).toString(),
+//                                                       style: Styles
+//                                                           .heading4(
+//                                                           context)
+//                                                           .copyWith(
+//                                                           color: Colors
+//                                                               .black),
+//                                                       maxLines: 3,
+//                                                     )
+//                                                   ],
+//                                                 ),
+//                                               ),
+//                                             ),
+//                                           ],
+//                                         ),
+//                                         padding: EdgeInsets.all(
+//                                             defaultPadding(context) *
+//                                                 0.2),
+//                                         width: double.infinity,
+//                                       ),
+//                                       shape: RoundedRectangleBorder(
+//                                           borderRadius:
+//                                           BorderRadius.circular(
+//                                               10)),
+//                                     )
+//                                 );
+//
+//                                 // -------------------------
+//                               })
+//                         // child: DeliveryList(),
+//                       );
+//                     }, error: (error, stackTrace) => Text(error.toString(), style: Styles.heading3(context),), loading: (){
+//                       return CircularProgressIndicator();
+//                     }),
+//
+//                     SizedBox(
+//                       height: defaultPadding(context) * 1.3,
+//                     ),
+//
+//                     Row(
+//                       mainAxisAlignment:
+//                       MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Text(
+//                           'Past Deliveries',
+//                           style: Styles.heading3(context),
+//                         ),
+//                         const SizedBox(
+//                           height: 10,
+//                         ),
+//
+//                       ],
+//                     ),
+//                     SizedBox(
+//                       height: defaultPadding(context) * 1.3,
+//                     ),
+//                     ref.watch(pastDeliveriesProvider).when(data: (data){
+//                       if(data.isEmpty){
+//                         return Padding(
+//                           padding: const EdgeInsets.all(8.0),
+//                           child: Align(
+//                               alignment: Alignment.centerLeft,
+//                               child: Text("No deliveries", style: Styles.heading3(context).copyWith(color: Colors.black54))),
+//                         );
+//                       }
+//                       return Expanded(
+//                           child: ListView.builder(
+//                               shrinkWrap: true,
+//                               itemCount:data.length,
+//                               // mydeliveries.length,
+//                               itemBuilder: (context, index) {
+//                                 double totalPrice = 0;
+//                                 data[index].deliveryItems.forEach((item) {
+//                                   totalPrice += double.parse(item.sellingPrice!) * double.parse(item.allocatedQuantity!);
+//                                 });
+//                                 return GestureDetector(
+//                                     onTap: () {
+//                                       Get.to(
+//                                           DetailedDeliveryScreen(delivery: data[index], initialScreen: 'user_deliveries'));
+//                                     },
+//                                     child: Card(
+//                                       elevation: 2,
+//                                       child: Container(
+//                                         child: Row(
+//                                           //crossAxisAlignment: CrossAxisAlignment.start,
+//                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                                           children: [
+//                                             Flexible(
+//                                               flex: 5,
+//                                               child: Padding(
+//                                                 padding:
+//                                                 const EdgeInsets.only(left: 10),
+//                                                 child: Column(
+//                                                   crossAxisAlignment: CrossAxisAlignment.start,
+//                                                   mainAxisAlignment: MainAxisAlignment.center,
+//                                                   children: [
+//                                                     const SizedBox(
+//                                                       height: 10,
+//                                                     ),
+//                                                     Text(data[index].customer.customerName!, style: Styles.heading3(context),
+//                                                     ),
+//                                                     const SizedBox(height: 10,),
+//                                                     Text(data[index].deliveryNote ?? "No info..", style: Styles.smallGreyText(context),
+//                                                       maxLines: 3,
+//                                                     ),
+//                                                     const SizedBox(
+//                                                       height: 10,
+//                                                     ),
+//                                                     Text("Kshs. ${formatCurrency.format(totalPrice)}", style: Styles.heading3(context).copyWith(color: Styles.appYellowColor),
+//                                                       maxLines: 3,
+//                                                     )
+//                                                   ],
+//                                                 ),
+//                                               ),
+//                                             ),
+//                                             Flexible(
+//                                               flex: 2,
+//                                               child: Padding(padding: const EdgeInsets.only(left: 5),
+//                                                 child: Column(
+//                                                   crossAxisAlignment: CrossAxisAlignment.end,
+//                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                                                   children: [
+//                                                     Icon(
+//                                                       Icons.more_vert,
+//                                                       color: Colors
+//                                                           .black,
+//                                                       size: 30.0,
+//                                                     ),
+//                                                     const SizedBox(
+//                                                       height: 30,
+//                                                     ),
+//                                                     Text(
+//                                                        DateFormat.yMMMEd().format( data[index].createdAt).toString(),
+//                                                       style: Styles
+//                                                           .heading4(
+//                                                           context)
+//                                                           .copyWith(
+//                                                           color: Colors
+//                                                               .black),
+//                                                       maxLines: 3,
+//                                                     )
+//                                                   ],
+//                                                 ),
+//                                               ),
+//                                             ),
+//                                           ],
+//                                         ),
+//                                         padding: EdgeInsets.all(
+//                                             defaultPadding(context) *
+//                                                 0.2),
+//                                         width: double.infinity,
+//                                       ),
+//                                       shape: RoundedRectangleBorder(
+//                                           borderRadius:
+//                                           BorderRadius.circular(
+//                                               10)),
+//                                     )
+//                                 );
+//
+//                                 // -------------------------
+//                               })
+//                         // child: DeliveryList(),
+//                       );
+//                     }, error: (error, stackTrace) => Text(error.toString(), style: Styles.heading3(context),), loading: (){
+//                       return CircularProgressIndicator();
+//                     }),
+//
+//                     //========================================
+//                   ],
+//                 )
+//             ),
+//       ),
+//     ));
+//   }
+// }

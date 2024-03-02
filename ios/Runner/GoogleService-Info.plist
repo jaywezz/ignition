@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>102233149888-uq64lr37ub96mo46adqnc34bv3r7hklk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.102233149888-uq64lr37ub96mo46adqnc34bv3r7hklk</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>102233149888-sudt10t9enr2vo0llvahgqbrs5uf8aqg.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCuhfBRBHk-9kBg5i3cf5gtueVK3ru9LE8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>102233149888</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.total.sokoflow.totalSokoflow</string>
+	<key>PROJECT_ID</key>
+	<string>sokoflow-5d830</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sokoflow-5d830.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:102233149888:ios:c12d5f1879d927701f7825</string>
+</dict>
+</plist>

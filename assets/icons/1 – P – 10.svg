@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-_1_P_10);
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #449a95;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.8px;
+      }
+    </style>
+    <clipPath id="clip-_1_P_10">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="_1_P_10" data-name="1 – P – 10" class="cls-1">
+    <g id="Icon_feather-arrow-right-circle" data-name="Icon feather-arrow-right-circle" transform="translate(7.469 7.469)">
+      <path id="Path_45" data-name="Path 45" class="cls-2" d="M32.062,17.531A14.531,14.531,0,1,1,17.531,3,14.531,14.531,0,0,1,32.062,17.531Z"/>
+      <path id="Path_46" data-name="Path 46" class="cls-2" d="M18,23.625l5.812-5.812L18,12" transform="translate(-0.469 -0.281)"/>
+      <path id="Path_47" data-name="Path 47" class="cls-2" d="M12,18H23.625" transform="translate(-0.281 -0.469)"/>
+    </g>
+  </g>
+</svg>
