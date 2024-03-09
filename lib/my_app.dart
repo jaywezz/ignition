@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Soko Flow',
               navigatorKey: navigatorKey,
-              theme: ThemeData(
+              theme: ThemeData(useMaterial3: false,
                 textTheme: GoogleFonts.poppinsTextTheme(),
               ),
               initialRoute: RouteHelper.getSplashPage(),

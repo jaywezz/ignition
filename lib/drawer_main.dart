@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:soko_flow/configs/constants.dart';
 import 'package:soko_flow/configs/styles.dart';
 import 'package:soko_flow/controllers/product_category_controller.dart';
+import 'package:soko_flow/views/auth/phone_login_screen.dart';
 
 import 'package:soko_flow/views/deliveries/deliveries_screen.dart.bak';
 import 'package:soko_flow/views/help/help.dart';
@@ -223,7 +224,8 @@ class _MainDrawerState extends State<MainDrawer> {
                           action: () {
                             Get.find<AuthController>().clearSharedData();
 
-                            Get.offNamed(RouteHelper.getLogin());
+                            // Get.offNamed(RouteHelper.getLogin());
+                            Get.off(PhoneLoginScreen());
                             Fluttertoast.showToast(msg: "Logout Successful");
                           },
                         ),

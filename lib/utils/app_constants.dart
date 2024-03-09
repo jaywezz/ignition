@@ -13,6 +13,7 @@ class AppConstants {
   // static const String BASE_URL = "http://172.104.245.14/sokoflowadmin/api";
   // static const String BASE_URL = "https://apps.sokoflow.com/api";
   static const String BASE_URL = "https://ignitionmarketing.sokoflow.com/api";
+  static const String STORAGE_URL = "https://ignitionmarketing.sokoflow.com";
   // static const String BASE_URL = "http://20.115.72.101/sidai_staging/api";
   // static const String BASE_URL = "https://sidai.sokoflow.com/sidai_staging/api";
 

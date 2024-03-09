@@ -13,6 +13,7 @@ import 'package:soko_flow/helper/dio_exceptions.dart';
 import 'package:soko_flow/routes/route_helper.dart';
 import 'package:soko_flow/services/auth_service.dart';
 import 'package:soko_flow/utils/app_constants.dart';
+import 'package:soko_flow/views/auth/otp_login_screen.dart';
 
 final authNotifier =
 StateNotifierProvider.autoDispose< AuthNotifier, AsyncValue>((ref) {
@@ -69,6 +70,58 @@ class AuthNotifier extends StateNotifier<AsyncValue> {
       state = AsyncValue.error(e.toString(), s);
       showSnackBar(text: "An error occurred", bgColor: Colors.red);
       throw e;
+    }
+  }
+
+
+  Future<void> otpLogin(String phoneNumber, String otp,  BuildContext context) async {
+    state = const AsyncValue.loading();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    ApiClient apiClient = ApiClient(appBaseUrl: AppConstants.BASE_URL, sharedPreferences: prefs);
+    AuthRepo authRepository =AuthRepo(apiClient: apiClient, sharedPreferences: prefs);
+    try {
+      final responseModel = await read.read(authRepo).otpLogin(phoneNumber, otp);
+      showCustomSnackBar("Login Successful.", isError: false);
+      authRepository.saveUserToken(responseModel.data["access_token"]);
+      AuthService.instance.login(responseModel.data);
+      await authRepository.saveUserCode(
+        responseModel.data["user"]["user_code"],
+      );
+      await authRepository.saveUserEmail(
+        responseModel.data["user"]["email"] ?? "",
+      );
+      await authRepository.saveUserPhone(
+        responseModel.data["user"]["phone_number"] ?? "",
+      );
+      await authRepository.saveUserName(
+          responseModel.data["user"]["name"] ?? "");
+      await authRepository.saveBusinessCode(
+          responseModel.data["user"]["business_code"] ?? "");
+      await authRepository.saveUserId(
+        responseModel.data["user"]["id"].toString(),
+      );
+      showSnackBar(text: "Successfully logged in", bgColor: Colors.green);
+      Get.toNamed(RouteHelper.getInitial());
+
+      if(!mounted) return;
+      state = AsyncValue.data(responseModel);
+    } catch (e, s) {
+      showCustomSnackBar(e.toString(), isError: true);
+      state = AsyncValue.error(e.toString(),s);
+    }
+  }
+
+  Future<void> sendOtp(String phoneNumber,  BuildContext context, bool isLogin) async {
+    state = const AsyncValue.loading();
+    try {
+      final responseModel = await read.read(authRepo).sendOtp(phoneNumber);
+      if(!mounted) return;
+      showCustomSnackBar("Otp sent successfully.", isError: false);
+      Get.to(OtpLogin2(phoneNumber: phoneNumber, otp: responseModel.data["otp"]));
+      state = AsyncValue.data(responseModel);
+    } catch (e, s) {
+      showCustomSnackBar(e.toString(), isError: true);
+      state = AsyncValue.error(e.toString(),s);
     }
   }
 

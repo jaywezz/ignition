@@ -6,7 +6,7 @@ import 'package:soko_flow/utils/size_utils2.dart';
 class Styles {
   //colors
   static Color appPrimaryColor = const Color(0xFFF44F22);
-  static Color appSecondaryColor = const Color(0xFFFFA500);
+  static Color appSecondaryColor = const Color(0xFF162743);
   static Color appSecondaryColorLight = const Color(0xFFFFCACF);
   static Color appYellowColor = const Color(0xFFFED700);
   static Color appPurpleColor = const Color(0xFFF44F22);

@@ -31,6 +31,7 @@ import 'package:soko_flow/data/repository/customer/user_onBoard_permisions_repo.
 import 'package:soko_flow/data/repository/get_data_count.dart';
 import 'package:soko_flow/models/customer_model/customer_model.dart';
 import 'package:soko_flow/routes/route_helper.dart';
+import 'package:soko_flow/utils/app_constants.dart';
 import 'package:soko_flow/views/customers/components/checkout_form/checkout_form_screen.dart';
 import 'package:soko_flow/views/customers/components/edit_customer_details.dart';
 
@@ -723,7 +724,7 @@ class _CustomerDetailsScreenState extends ConsumerState<CustomerDetailsScreen> {
                                           //     color: Colors.black,
                                           //   ),
                                           // ),
-                                          child: widget.customer.image==null?SizedBox():CachedNetworkImage(imageUrl: "https://sidai.sokoflow.com/storage/${widget.customer.image}",),
+                                          child: widget.customer.image==null?SizedBox():CachedNetworkImage(imageUrl: "${AppConstants.STORAGE_URL}/storage/${widget.customer.image}",),
                                         ),
                                       ),
                                       // Row(
@@ -810,7 +811,7 @@ class _CustomerDetailsScreenState extends ConsumerState<CustomerDetailsScreen> {
                                                 _makePhoneCall(customerPhone!);
                                               },
                                               style: ElevatedButton.styleFrom(
-                                                primary: Styles.appButtonColor,
+                                                backgroundColor: Styles.appButtonColor,
                                                 shape:
                                                     new RoundedRectangleBorder(
                                                   borderRadius:
@@ -830,7 +831,7 @@ class _CustomerDetailsScreenState extends ConsumerState<CustomerDetailsScreen> {
                                                 _sendSMS(customerPhone!);
                                               },
                                               style: ElevatedButton.styleFrom(
-                                                primary: Styles.appButtonColor,
+                                                backgroundColor: Styles.appButtonColor,
                                                 shape:
                                                     new RoundedRectangleBorder(
                                                   borderRadius:
@@ -1300,7 +1301,7 @@ class _ScheduleVisitWidgetState extends ConsumerState<ScheduleVisitWidget> {
                             ),
                             textButtonTheme: TextButtonThemeData(
                               style: TextButton.styleFrom(
-                                primary: Colors.red, // button text color
+                                foregroundColor: Colors.red, // button text color
                               ),
                             ),
                           ),

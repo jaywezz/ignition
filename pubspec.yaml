@@ -89,6 +89,7 @@ dependencies:
   upgrader: 6.2.0
   scrollable_table_view: ^1.0.1
   dropdown_textfield: ^1.0.8
+  pinput: ^4.0.0
 
 
 dependency_overrides:

@@ -11,6 +11,7 @@ import 'package:soko_flow/data/providers/client_provider.dart';
 import 'package:soko_flow/routes/route_helper.dart';
 import 'package:soko_flow/services/auth_service.dart';
 import 'package:soko_flow/update_app_screen.dart';
+import 'package:soko_flow/views/auth/phone_login_screen.dart';
 import 'package:soko_flow/widgets/poweredby_widget.dart';
 
 import 'controllers/auth_controller.dart';
@@ -79,9 +80,10 @@ class SplashScreenPageState extends ConsumerState<SplashScreenPage> {
         Get.offNamed(RouteHelper.getInitial(),
         );
       } else {
-        Get.offNamed(
-          RouteHelper.getLogin(),
-        );
+        // Get.offNamed(
+        //   RouteHelper.getLogin(),
+        // );
+        Get.off(PhoneLoginScreen());
       }
     });
     // if(await getCurrentAppVersion()){

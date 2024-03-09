@@ -22,7 +22,7 @@ class SurveyRepository {
         responseBody: true,
       ),
     );
-    final d.Response response = await dio.post(SURVEYS);
+    final d.Response response = await dio.get(SURVEYS);
     return response;
   }
 

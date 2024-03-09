@@ -31,10 +31,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     });
   }
   bool isLoading = false;
+
   void _sendOtp()async {
-
     var authController = Get.find<AuthController>();
-
     String phone = phoneNumber;
 
     if (phone.isEmpty) {
